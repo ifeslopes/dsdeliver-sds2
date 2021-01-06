@@ -24,12 +24,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
+			//http.csrf().disable();
+			//http.headers().frameOptions().sameOrigin();
 			http.headers().frameOptions().disable();
 		}
 		
 		http.cors().and().csrf().disable();
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().anyRequest().permitAll();
+		http.headers().frameOptions().disable();
+		//http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		//http.authorizeRequests().anyRequest().permitAll();
 	}
 
 	@Bean
